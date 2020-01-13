@@ -6,6 +6,8 @@ webapp: https://perfectionist-flutter-clock.firebaseapp.com/web/
 
 <img src='Screenshot_1.png' width='350'>
 
+<img src='demo.gif' width='350'>
+
 
 # The Concept
 

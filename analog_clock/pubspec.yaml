@@ -20,3 +20,29 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
+
+
+  #Fonts
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: third_party/fonts/Raleway-ExtraLight.ttf
+          weight: 200
+        - asset: third_party/fonts/Raleway-Light.ttf
+          weight: 300
+        - asset: third_party/fonts/Raleway-Regular.ttf
+        - asset: third_party/fonts/Raleway-Medium.ttf
+          weight: 500
+        - asset: third_party/fonts/Raleway-SemiBold.ttf
+          weight: 600
+        - asset: third_party/fonts/Raleway-Bold.ttf
+          weight: 700
+        - asset: third_party/fonts/Raleway-Black.ttf
+          weight: 900
+        - asset: third_party/fonts/Raleway-Italic.ttf
+          style: italic
+
+
+    - family:  Flutter_Clock
+      fonts:
+        - asset: third_party/icons/Flutter_Clock.ttf

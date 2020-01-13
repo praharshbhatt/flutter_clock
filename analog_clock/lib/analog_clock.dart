@@ -10,6 +10,7 @@ import 'package:flutter/semantics.dart';
 import 'package:intl/intl.dart';
 import 'package:vector_math/vector_math_64.dart' show radians;
 import 'drawn_hand.dart';
+import 'flutter__clock_icons.dart';
 
 /// Total distance traveled by a second or a minute hand, each second or minute,
 /// respectively.
@@ -99,13 +100,13 @@ class _AnalogClockState extends State<AnalogClock> {
             // Second hand.
             accentColor: Color.fromARGB(255, 252, 0, 83),
             backgroundColor: Colors.white,
-            textTheme: TextTheme(body1: TextStyle(color: Colors.white)))
+            textTheme: TextTheme(body1: TextStyle(color: Colors.black, fontFamily: "Railway", fontSize: size * 0.04)))
         : Theme.of(context).copyWith(
             primaryColor: Color(0xFFD2E3FC),
             highlightColor: Color(0xFF4285F4),
             accentColor: Color.fromARGB(255, 252, 0, 83),
             backgroundColor: Colors.black,
-            textTheme: TextTheme(body1: TextStyle(color: Colors.white)));
+            textTheme: TextTheme(body1: TextStyle(color: Colors.white, fontFamily: "Railway", fontSize: size * 0.04)));
 
     //We do not want to show the weather info here
     final time = DateFormat.Hms().format(DateTime.now());
@@ -140,10 +141,9 @@ class _AnalogClockState extends State<AnalogClock> {
                 alignment: AlignmentDirectional.center,
                 children: [
                   // Example of a hand drawn with [Container].
-                  Image.asset(
-                      Theme.of(context).brightness == Brightness.light
-                          ? "assets/images/hour_bg_light.png"
-                          : "assets/images/hour_bg_dark.png"),
+                  Image.asset(Theme.of(context).brightness == Brightness.light
+                      ? "assets/images/hour_bg_light.png"
+                      : "assets/images/hour_bg_dark.png"),
                   DrawnHand(
                     color: customTheme.accentColor,
                     thickness: 2,
@@ -154,6 +154,52 @@ class _AnalogClockState extends State<AnalogClock> {
               ),
             ),
 
+            //Date and weather
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+
+                //Weather
+                Padding(
+                  padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
+                  child: Stack(
+                    alignment: AlignmentDirectional.center,
+                    children: <Widget>[
+                      //Background Image
+                      Image.asset(
+                          Theme.of(context).brightness == Brightness.light
+                              ? "assets/images/weather_light.png"
+                              : "assets/images/weather_dark.png",
+                          width: size * 0.16),
+
+                      //Weather Icon
+                      Icon(getWeatherIcon(), color: customTheme.accentColor, size: size*0.07,)
+                    ],
+                  ),
+                ),
+
+                //Date
+                Stack(
+                  alignment: AlignmentDirectional.center,
+                  children: <Widget>[
+                    //Background Image
+                    Image.asset(
+                        Theme.of(context).brightness == Brightness.light
+                            ? "assets/images/date_light.png"
+                            : "assets/images/date_dark.png",
+                        width: size * 0.2),
+
+                    //Date
+                    Center(
+                        child: Text(
+                            DateTime.now().day.toString() + " " + getMonthsFromInt(DateTime.now().month).toString(),
+                            style: customTheme.textTheme.body1.copyWith(fontWeight: FontWeight.bold),
+                            textAlign: TextAlign.center))
+                  ],
+                )
+              ],
+            ),
+
             //Minutes
             Expanded(
               flex: 5,
@@ -161,15 +207,14 @@ class _AnalogClockState extends State<AnalogClock> {
                 alignment: AlignmentDirectional.center,
                 children: [
                   // Example of a hand drawn with [CustomPainter].
-                  Image.asset(
-                      Theme.of(context).brightness == Brightness.light
-                          ? "assets/images/minute_bg_light.png"
-                          : "assets/images/minute_bg_dark.png"),
+                  Image.asset(Theme.of(context).brightness == Brightness.light
+                      ? "assets/images/minute_bg_light.png"
+                      : "assets/images/minute_bg_dark.png"),
 
                   //Seconds
                   DrawnHand(
                     color: customTheme.accentColor,
-                    thickness: 2,
+                    thickness: 1,
                     size: size * 0.001,
                     angleRadians: _now.second * radiansPerTick,
                   ),
@@ -178,7 +223,7 @@ class _AnalogClockState extends State<AnalogClock> {
                   DrawnHand(
                     color: customTheme.accentColor,
                     thickness: 2,
-                    size: size * 0.0008,
+                    size: size * 0.0017,
                     angleRadians: _now.minute * radiansPerTick,
                   ),
                 ],
@@ -189,4 +234,49 @@ class _AnalogClockState extends State<AnalogClock> {
       ),
     );
   }
+
+  IconData getWeatherIcon() {
+    if (_condition == "cloudy")
+      return Icons.cloud;
+    else if (_condition == "foggy")
+      return Flutter_Clock.fog;
+    else if (_condition == "rainy")
+      return Icons.grain;
+    else if (_condition == "snowy")
+      return Flutter_Clock.snow_inv;
+    else if (_condition == "sunny")
+      return Icons.wb_sunny;
+    else if (_condition == "thunderstorm")
+      return Flutter_Clock.cloud_flash;
+    else if (_condition == "windy")
+      return Flutter_Clock.wind;
+    else
+      return Flutter_Clock.na;
+  }
+}
+
+getMonthsFromInt(int month) {
+  if (month == 1)
+    return "Jan";
+  else if (month == 2)
+    return "Feb";
+  else if (month == 3)
+    return "March";
+  else if (month == 4)
+    return "April";
+  else if (month == 5)
+    return "May";
+  else if (month == 6)
+    return "June";
+  else if (month == 7)
+    return "July";
+  else if (month == 8)
+    return "Aug";
+  else if (month == 9)
+    return "Sep";
+  else if (month == 10)
+    return "Oct";
+  else if (month == 11)
+    return "Nov";
+  else if (month == 12) return "Dec";
 }

@@ -8,6 +8,7 @@ webapp: https://perfectionist-flutter-clock.firebaseapp.com/web/
 
 <img src='analog_clock/Screenshot_1.png' width='350'>
 
+<img src='analog_clock/demo.gif' width='350'>
 
 # The Concept
 
