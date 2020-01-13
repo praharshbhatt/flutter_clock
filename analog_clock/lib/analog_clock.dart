@@ -129,7 +129,7 @@ class _AnalogClockState extends State<AnalogClock> {
         value: time,
       ),
       child: Container(
-        padding: EdgeInsets.all(5),
+        padding: EdgeInsets.all(15),
         color: customTheme.backgroundColor,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -179,23 +179,26 @@ class _AnalogClockState extends State<AnalogClock> {
                 ),
 
                 //Date
-                Stack(
-                  alignment: AlignmentDirectional.center,
-                  children: <Widget>[
-                    //Background Image
-                    Image.asset(
-                        Theme.of(context).brightness == Brightness.light
-                            ? "assets/images/date_light.png"
-                            : "assets/images/date_dark.png",
-                        width: size * 0.2),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(0, 0, 0, 15),
+                  child: Stack(
+                    alignment: AlignmentDirectional.center,
+                    children: <Widget>[
+                      //Background Image
+                      Image.asset(
+                          Theme.of(context).brightness == Brightness.light
+                              ? "assets/images/date_light.png"
+                              : "assets/images/date_dark.png",
+                          width: size * 0.24),
 
-                    //Date
-                    Center(
-                        child: Text(
-                            DateTime.now().day.toString() + " " + getMonthsFromInt(DateTime.now().month).toString(),
-                            style: customTheme.textTheme.body1.copyWith(fontWeight: FontWeight.bold),
-                            textAlign: TextAlign.center))
-                  ],
+                      //Date
+                      Center(
+                          child: Text(
+                              DateTime.now().day.toString() + " " + getMonthsFromInt(DateTime.now().month).toString(),
+                              style: customTheme.textTheme.body1.copyWith(fontWeight: FontWeight.normal),
+                              textAlign: TextAlign.center))
+                    ],
+                  ),
                 )
               ],
             ),
