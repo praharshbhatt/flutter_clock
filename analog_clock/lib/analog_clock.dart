@@ -148,7 +148,7 @@ class _AnalogClockState extends State<AnalogClock> {
                     color: customTheme.accentColor,
                     thickness: 2,
                     size: size * 0.001,
-                    angleRadians: _now.hour * radiansPerTick,
+                    angleRadians: _now.hour * radiansPerHour,
                   ),
                 ],
               ),
@@ -189,12 +189,12 @@ class _AnalogClockState extends State<AnalogClock> {
                           Theme.of(context).brightness == Brightness.light
                               ? "assets/images/date_light.png"
                               : "assets/images/date_dark.png",
-                          width: size * 0.24),
+                          width: size * 0.27),
 
                       //Date
                       Center(
                           child: Text(
-                              DateTime.now().day.toString() + " " + getMonthsFromInt(DateTime.now().month).toString(),
+                              _now.day.toString() + " " + getMonthsFromInt(_now.month).toString(),
                               style: customTheme.textTheme.body1.copyWith(fontWeight: FontWeight.normal),
                               textAlign: TextAlign.center))
                     ],
